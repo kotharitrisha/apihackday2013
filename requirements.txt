@@ -8,7 +8,6 @@ Werkzeug==0.9.1
 altgraph==0.8
 bdist-mpkg==0.4.4
 beautifulsoup4==4.2.0
-bonjour-py==0.3
 chardet==2.1.1
 fudge==1.0.3
 httplib2==0.8
