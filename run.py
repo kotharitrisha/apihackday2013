@@ -26,13 +26,14 @@ if __name__=="__main__":
 
 def send_records(client, from_no):
     records="Last 3 medical records: "
-    message_from = client.sms.messages.list(from_=from_no)
+    list = client.sms.messages.list(from_=from_no)
 
     y = 0
 
-    for x in message_from:
-        records = records  + x.body + "; "
-        y=y+1
+    for x in list:
+        if x != "logs":
+            records = records  + x.body + "; "
+            y=y+1
         if y==3:
             break
     print records
@@ -47,7 +48,7 @@ def parse(client, message, from_no):
     splitter=message.split(" ")
     if splitter[0] == "update":
         update(client, from_no)
-    else:
+    if splitter[0] == "logs":
         send_records(client, from_no)
 
 #client=TwilioRestClient(account_sid, auth_token)
