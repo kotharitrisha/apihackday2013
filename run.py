@@ -31,9 +31,11 @@ def send_records(client, from_no):
     y = 0
 
     for x in list:
-        if x != "logs":
-            records = records  + x.body + "; "
-            y=y+1
+        if x == "logs":
+            continue
+        x.body = x.body.replace("update ", "")
+        records = records  + x.body + "; "
+        y=y+1
         if y==3:
             break
     print records
