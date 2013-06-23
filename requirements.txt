@@ -5,7 +5,7 @@ PyRSS2Gen==1.0.0
 Pygments==1.5
 Twisted==11.0.0
 Werkzeug==0.9.1
-altgraph==0.7.1
+altgraph==0.8
 bdist-mpkg==0.4.4
 beautifulsoup4==4.2.0
 bonjour-py==0.3
