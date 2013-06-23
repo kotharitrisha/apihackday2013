@@ -1,3 +1,4 @@
+
 import os
 from flask import Flask, request, redirect
 from twilio.rest import TwilioRestClient
@@ -8,6 +9,7 @@ auth_token="fe9db2fafd17b354f0885cef8c8f043c"
 
 @app.route("/twilio", methods=['GET','POST'])
 def hello():
+    client=TwilioRestClient(account_sid, auth_token)
     client.sms.messages.create(from_="+14083296276", to="+15126668669",
                                body= "lets say")
 
@@ -45,5 +47,5 @@ def parse(client, message):
     else:
         send_records(client)
 
-client=TwilioRestClient(account_sid, auth_token)
-parse(client, msg)
+#client=TwilioRestClient(account_sid, auth_token)
+#parse(client, msg)
