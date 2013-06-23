@@ -1,15 +1,49 @@
 import os
 from flask import Flask, request, redirect
-import twilio.twiml
+from twilio.rest import TwilioRestClient
 
 app = Flask(__name__)
+account_sid= "ACf4705035a6d79ae5859ad143026b5cbb"
+auth_token="fe9db2fafd17b354f0885cef8c8f043c"
 
-@app.route("/", methods=['GET','POST'])
+@app.route("/twilio", methods=['GET','POST'])
 def hello():
-    print request.values.get('From', None)
-    resp=twilio.twiml.Response()
-    resp.sms("Hello, Mobile Monkey")
-    return str(resp)
+    client.sms.messages.create(from_="+14083296276", to="+15126668669",
+                               body= "lets say")
 
 if __name__=="__main__":
     app.run(debug=True)
+
+
+
+#message = client.sms.messages.create(from_="+14083296276", to="+15126668669",
+#                                     body= "You have verified")
+
+def send_records(client):
+    records="Last 3 medical records: "
+    message_from = client.sms.messages.list(from_="=15126668669")
+
+    y = 0
+
+    for x in message_from:
+        records = records  + x.body + "; "
+        y=y+1
+        if y==3:
+            break
+    print records
+    client.sms.messages.create(from_="+14083296276", to="+15126668669",
+                               body= records)
+
+def update(client):
+    client.sms.messages.create(from_="+14083296276", to="+15126668669",
+                               body= "Thanks You for updating")
+
+def parse(client, message):
+    splitter=message.split(" ")
+    if splitter[0] == "update":
+        update(client)
+    else:
+        send_records(client)
+
+client=TwilioRestClient(account_sid, auth_token)
+parse(client, msg)
