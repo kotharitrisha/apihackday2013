@@ -31,7 +31,7 @@ def send_records(client, from_no):
     y = 0
 
     for x in list:
-        if x == "logs":
+        if x.body == "logs":
             continue
         x.body = x.body.replace("update ", "")
         records = records  + x.body + "; "
