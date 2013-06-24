@@ -13,16 +13,12 @@ def hello():
     from_number=request.values.get('From', None)
     body=request.values.get('Body', None)
     parse(client, body, from_number)
-#    client.sms.messages.create(from_="+14083296276", to="+15126668669",
-#                               body= "lets say")
+
 
 if __name__=="__main__":
     app.run(debug=True)
 
 
-
-#message = client.sms.messages.create(from_="+14083296276", to="+15126668669",
-#                                     body= "You have verified")
 
 def send_records(client, from_no):
     records="Last 3 medical records: "
@@ -53,5 +49,4 @@ def parse(client, message, from_no):
     if splitter[0] == "logs":
         send_records(client, from_no)
 
-#client=TwilioRestClient(account_sid, auth_token)
-#parse(client, msg)
+
